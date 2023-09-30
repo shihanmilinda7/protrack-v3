@@ -1,0 +1,2 @@
+GET http://localhost:3000/api/time-allocation/get_cat_as_catid?categoryid=2 HTTP/1.1
+
