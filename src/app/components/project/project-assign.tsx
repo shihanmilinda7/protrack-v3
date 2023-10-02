@@ -273,7 +273,7 @@ const ProjectAssignScreen = ({
                   {staffname}
                 </span>
               </span>
-              <div className="max-h-[400px] overflow-y-auto">
+              <div className="max-h-[450px] overflow-y-auto">
                 {staffRowObjects && (
                   <PrjAssignStaffTable
                     staffTableClickEvent={staffTableClickEvent}
@@ -297,7 +297,7 @@ const ProjectAssignScreen = ({
                 Task list
                 <span className="italic text-base text-black-600"></span>
               </span>
-              <div className="max-h-[400px] overflow-y-auto">
+              <div className="max-h-[450px] overflow-y-auto">
                 <PrjAssignTaskTable />
               </div>
             </div>

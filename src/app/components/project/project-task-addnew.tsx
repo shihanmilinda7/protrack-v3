@@ -2,11 +2,23 @@
 
 import Modal from "react-modal";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { TaskObjectTypes } from "./types";
 import { inputFieldValidation } from "@/app/utils/utils";
-import { Button } from "@nextui-org/react";
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+  getKeyValue,
+} from "@nextui-org/react";
 import { MdOutlineEditNote } from "react-icons/md";
+import { HiUserGroup } from "react-icons/hi";
 import NextAutoFocusTextInputField from "../common-comp/nextui-input-fields/next-autofocus-text-input-fields";
 import NextTextInputField from "../common-comp/nextui-input-fields/next-text-input-fields";
 import NextDateInputField from "../common-comp/nextui-input-fields/next-date-input-fields";
@@ -54,8 +66,16 @@ const NewProjectTask = ({
     },
   };
 
+  const itemClasses = {
+    base: "py-0 w-full",
+    title: "font-normal text-medium",
+    trigger:
+      "py-0 data-[hover=true]:bg-gray-200 rounded-lg h-14 flex items-center",
+    indicator: "text-medium",
+    content: "text-small px-2",
+  };
+
   const addnewOrupdate = () => {
-    setIsOpen(false);
     const validation = inputFieldValidation({
       taskname,
       taskdescription,
@@ -63,6 +83,7 @@ const NewProjectTask = ({
       enddate,
     });
     if (validation == 0) {
+      setIsOpen(false);
       // setIsOpen(false);
       arrayUpdateFuntion(
         { taskname, taskdescription, startdate, enddate },
@@ -87,6 +108,52 @@ const NewProjectTask = ({
     }
   };
 
+  const [selectedKeys, setSelectedKeys] = useState<any>([]);
+  const columns = [
+    {
+      key: "name",
+      label: "NAME",
+    },
+  ];
+  const rows = [
+    {
+      key: "1",
+      name: "Tony Reichert",
+      role: "CEO",
+      status: "Active",
+    },
+    {
+      key: "2",
+      name: "Zoey Lang",
+      role: "Technical Lead",
+      status: "Paused",
+    },
+    {
+      key: "3",
+      name: "Jane Fisher",
+      role: "Senior Developer",
+      status: "Active",
+    },
+    {
+      key: "4",
+      name: "William Howard",
+      role: "Community Manager",
+      status: "Vacation",
+    },
+  ];
+  // const selectedValue = React.useMemo(
+  //   () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+  //   [selectedKeys]
+  // );
+  const selectedValue = React.useMemo(() => {}, [selectedKeys]);
+  // const selectedValue = React.useMemo(() => {
+  //   const selectedNamesAndRoles = rows
+  //     .filter((row) => selectedKeys.includes(row.key))
+  //     .map((row) => `${row.name} - ${row.role}`)
+  //     .join(", ");
+
+  //   return selectedNamesAndRoles;
+  // }, [selectedKeys, rows]);
   return (
     <div>
       {buttonName == "Edit Task" ? (
@@ -118,7 +185,7 @@ const NewProjectTask = ({
         </div>
         <div className="flex items-center justify-center">
           <div className="mx-auto w-full min-w-[550px] p-6">
-            <div className="-mx-3 flex flex-wrap">
+            <div className="flex flex-wrap">
               <div className="w-full flex flex-col gap-3">
                 <NextAutoFocusTextInputField
                   label="Task name"
@@ -142,6 +209,55 @@ const NewProjectTask = ({
                 />
               </div>
             </div>
+            <h1>{JSON.stringify(selectedValue)}</h1>
+            {/* <div className="max-w-[550px]">
+              <Accordion
+                showDivider={false}
+                className="flex flex-col gap-1 w-full mt-3"
+                variant="shadow"
+                itemClasses={itemClasses}
+              >
+                <AccordionItem
+                  aria-label="Add members"
+                  startContent={<HiUserGroup className="text-primary" />}
+                  subtitle={
+                    <p className="flex">
+                      <p className="text-primary">Assign members for task</p>
+                    </p>
+                  }
+                  title="Add members"
+                >
+                  <div className="max-h-[200px] overflow-y-auto">
+                    <Table
+                      aria-label="Controlled table example with dynamic content"
+                      selectionMode="multiple"
+                      selectedKeys={selectedKeys}
+                      onSelectionChange={setSelectedKeys}
+                    >
+                      <TableHeader columns={columns}>
+                        {(column) => (
+                          <TableColumn key={column.key}>
+                            {column.label}
+                          </TableColumn>
+                        )}
+                      </TableHeader>
+
+                      <TableBody items={rows}>
+                        {(item) => (
+                          <TableRow key={item.key}>
+                            {(columnKey) => (
+                              <TableCell>
+                                {getKeyValue(item, columnKey)}
+                              </TableCell>
+                            )}
+                          </TableRow>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </AccordionItem>
+              </Accordion>
+            </div> */}
             <div className="flex items-center justify-center mt-3">
               <div className="flex gap-2">
                 <Button

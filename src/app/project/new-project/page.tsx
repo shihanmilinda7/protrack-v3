@@ -98,7 +98,9 @@ export default function NewProject() {
           setTaskRowObjects(tmpArray);
         } else {
           //update display object
-          tmpArray.push(tasks);
+          tasks.assignmembers = [];
+          tmpArray.unshift(tasks);
+          // tmpArray.push(tasks);
           setTaskRowObjects(tmpArray);
           //update initial object
         }

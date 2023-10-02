@@ -9,6 +9,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import Spinner from "./loading";
 import Link from "next/link";
+import Calendar from 'react-calendar';
 
 type TaskDashBoardObj = {
   taskid?: number;
@@ -229,7 +230,7 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
-
+        <Calendar />
         {/* <div className="mt-4 w-full lg:w-6/12 xl:w-3/12 px-5">
           <div className="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
             <div className="flex-auto p-4">

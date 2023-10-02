@@ -283,7 +283,11 @@ const Navbar = () => {
             </div> */}
             <li
               className={
-                userRole == "Admin" || userRole == "User" ? "" : "hidden"
+                userRole == "Admin" ||
+                userRole == "Manager" ||
+                userRole == "User"
+                  ? ""
+                  : "hidden"
               }
             >
               <button
@@ -294,7 +298,7 @@ const Navbar = () => {
                     : nonActiveStyle
                 }
               >
-                Daily Achievements
+                Time logs
               </button>
             </li>
             <li

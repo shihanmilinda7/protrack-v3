@@ -11,6 +11,7 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
 } from "@nextui-org/react";
 
 export const ProjectTaskTable = ({
@@ -65,15 +66,36 @@ export const ProjectTaskTable = ({
                   <TableCell className="w-40">{tableRow.startdate}</TableCell>
                   <TableCell className="w-40">{tableRow.enddate}</TableCell>
                   <TableCell className="w-60">
-                    <span className="inline-block mr-2 last:mr-0 py-1 px-2 rounded-full bg-green-500 text-xs font-semibold text-white">
-                      {tableRow.assignmembers.length}
-                    </span>
+                    <Tooltip
+                      color={`${
+                        tableRow.assignmembers?.length == "0"
+                          ? "danger"
+                          : "success"
+                      }`}
+                      content={`${
+                        tableRow.assignmembers
+                          ? tableRow.assignmembers.length
+                          : "0"
+                      } members assigned`}
+                    >
+                      <span
+                        className={`inline-block mr-2 last:mr-0 py-1 px-2 rounded-full ${
+                          tableRow.assignmembers?.length == "0"
+                            ? "bg-red-500"
+                            : "bg-green-500"
+                        } text-xs font-semibold text-white`}
+                      >
+                        {tableRow.assignmembers
+                          ? tableRow.assignmembers.length
+                          : "0"}
+                      </span>
+                    </Tooltip>
                     <span>
                       {tableRow.assignmembers
                         ? tableRow.assignmembers
                             .map((m) => m.staffname)
                             .join(", ")
-                        : "No Data"}
+                        : ""}
                     </span>
                   </TableCell>
                   <TableCell className="w-10">

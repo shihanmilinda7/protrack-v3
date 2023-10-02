@@ -428,9 +428,9 @@ export default function ProjectAssign() {
             <div>
               {taskRowObjects && (
                 <PrjAssignTaskTable
-                  staffid={staffid}
-                  projectid={projectid}
-                  taskRowObjectsIn={taskRowObjects}
+                  // staffid={staffid}
+                  // projectid={projectid}
+                  // taskRowObjectsIn={taskRowObjects}
                   // tablePagination={taskTablePage}
                   // toggleSaveFlag={toggleSaveFlag}
                 />
