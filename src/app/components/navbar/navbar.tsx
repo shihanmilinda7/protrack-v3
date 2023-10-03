@@ -96,6 +96,9 @@ const Navbar = () => {
         case "work-done-report":
           router.push("/work-done-report");
           break;
+        case "setup-calendar":
+          router.push("/setup-calendar");
+          break;
         case "sign-out":
           await signOut();
           window.location.href = "/";
@@ -317,7 +320,55 @@ const Navbar = () => {
                 Progress Report
               </button>
             </li>
-
+            {/* <li
+              className={
+                userRole == "Admin" || userRole == "Manager" ? "" : "hidden"
+              }
+            >
+              <button
+                onClick={() => navButtonHandler("setup-calendar")}
+                className={
+                  currentRoute === "/setup-calendar"
+                    ? activeStyle
+                    : nonActiveStyle
+                }
+              >
+                Calendar
+              </button>
+            </li> */}
+            <div
+              className={
+                userRole == "Admin" || userRole == "Manager"
+                  ? "dropdown inline-block relative rounded-lg z-40"
+                  : "hidden"
+              }
+            >
+              <button className={nonActiveStyle + " inline-flex"}>
+                <span className="mr-1">Settings</span>
+              </button>
+              <ul className="dropdown-menu absolute hidden text-gray-700 pt-1">
+                <li
+                  className={
+                    userRole == "Admin" ||
+                    userRole == "Manager" ||
+                    userRole == "User"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <button
+                    onClick={() => navButtonHandler("setup-calendar")}
+                    className={
+                      currentRoute === "/setup-calendar"
+                        ? dropActiveStyle
+                        : dropNonActiveStyle
+                    }
+                  >
+                    Calendar Settings
+                  </button>
+                </li>
+              </ul>
+            </div>
             <div className="flex items-center justify-center">
               <svg
                 version="1.1"
