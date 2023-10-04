@@ -105,17 +105,30 @@ const NewCalendarEvent = ({
   // };
 
   const addnew = () => {
-    const sample = {
-      id: nextid,
-      name: note,
-      location: "San Francisco, CA",
-      startDate: new Date(selectedDate),
-      endDate: new Date(selectedDate),
-      color: colourCode,
-      uniqueKey: selectedDate,
-    };
-    updatDataSource(sample);
-    closePopup();
+    if (colourCode) {
+      const sample = {
+        id: nextid,
+        name: note,
+        location: "San Francisco, CA",
+        startDate: new Date(selectedDate),
+        endDate: new Date(selectedDate),
+        color: colourCode,
+        uniqueKey: selectedDate,
+      };
+      updatDataSource(sample);
+      closePopup();
+    } else {
+      toast.info("Please select date type!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   };
 
   // const update = () => {

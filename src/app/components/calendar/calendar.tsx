@@ -7,7 +7,13 @@ import { Button } from "@nextui-org/react";
 import { filterDataSource, modifiedDataForSave } from "./utils";
 import { toast } from "react-toastify";
 
-export const SetupCalendar = ({ year }: { year: any }) => {
+export const SetupCalendar = ({
+  year,
+  country,
+}: {
+  year: any;
+  country: any;
+}) => {
   let pathname: string = "";
 
   try {
@@ -32,6 +38,7 @@ export const SetupCalendar = ({ year }: { year: any }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selDataSource, setSelDataSource] = useState("");
   const [saveUpdate, setSaveUpdate] = useState(false);
+  const [calanderid, setCalanderid] = useState("");
 
   const toggleSave = () => {
     setSaveUpdate((prv: boolean) => !prv);
@@ -69,7 +76,7 @@ export const SetupCalendar = ({ year }: { year: any }) => {
 
   useEffect(() => {
     fetchYearData();
-  }, [year, saveUpdate]);
+  }, [year, country, saveUpdate]);
 
   useEffect(() => {
     if (selectedDate) {
@@ -103,6 +110,8 @@ export const SetupCalendar = ({ year }: { year: any }) => {
         body: JSON.stringify({
           dataSource: saveDataSource,
           year,
+          calanderid,
+          country,
         }),
       });
       const res = await response.json();
@@ -137,12 +146,11 @@ export const SetupCalendar = ({ year }: { year: any }) => {
   const fetchYearData = async () => {
     const fetchData = async () => {
       const reponse = await fetch(
-        pathname + "/api/setup-calendar?year=" + year
+        pathname + "/api/setup-calendar?year=" + year + "&country=" + country
       );
       const res = await reponse.json();
-      console.log("res", res);
+      // console.log("res", res);
       const modifiedData = res.dataSource.map((item, index) => ({
-        calanderdatasourceid: item.calanderdatasourceid,
         id: index,
         name: item.name,
         location: item.location,
@@ -152,6 +160,7 @@ export const SetupCalendar = ({ year }: { year: any }) => {
         uniqueKey: item.uniqueKey,
       }));
       setDataSource(modifiedData);
+      setCalanderid(res.headerData[0]?.calanderid);
     };
     // call the function
     if (year) {
@@ -170,7 +179,7 @@ export const SetupCalendar = ({ year }: { year: any }) => {
         dateChange={dateChange}
       />
       <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-3">
-        <span className="text-indigo-600">Calendar - {year}</span>
+        <span className="text-indigo-600">Calendar - {year} ({country})</span>
       </span>
       <div className="">
         <Calendar

@@ -22,11 +22,15 @@ import { MdNewLabel, MdOutlineDownloadDone } from "react-icons/md";
 import { ListboxWrapper } from "../components/common-comp/nextui-input-fields/ListboxWrapper";
 import NextNumberInputField from "../components/common-comp/nextui-input-fields/next-number-input-fields";
 import { toast } from "react-toastify";
+import CountrySelector from "../components/country-selector/selector";
+import { COUNTRIES } from "../components/country-selector/countries";
+import { SelectMenuOption } from "../components/country-selector/types";
 
 export default function Calendar() {
   const router = useRouter();
   const { data: session, status } = useSession();
   const currentYear = new Date().getFullYear();
+  const currentCountry = "Sri Lanka";
 
   let pathname: string = "";
 
@@ -41,37 +45,78 @@ export default function Calendar() {
     }
   }
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [country, setCountry] = useState<SelectMenuOption["value"]>("LK");
+
   const [yearList, setYearList] = useState([]);
+  // const [countryList, setCountryList] = useState([]);
+
   const [newYear, setNewYear] = useState("");
-  const [selectedKey, setSelectedKey] = useState(
+  // const [newCountry, setNewCountry] = useState("");
+
+  const [selectedYearKey, setSelectedYearKey] = useState(
     new Set([currentYear.toString()])
   );
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKey).join(", "),
-    [selectedKey]
+
+  // const [selectedCountryKey, setSelectedCountryKey] = useState(
+  //   new Set(["Sri Lanka"])
+  // );
+
+  const selectedYearValue = React.useMemo(
+    () => Array.from(selectedYearKey).join(", "),
+    [selectedYearKey]
   );
 
-  const [transformed, setTransformed] = useState(false);
+  // const selectedCountryValue = React.useMemo(
+  //   () => Array.from(selectedCountryKey).join(", "),
+  //   [selectedCountryKey]
+  // );
 
-  const handleButtonClick = () => {
-    setTransformed(!transformed);
+  const [transformedYear, setTransformedYear] = useState(false);
+  // const [transformedCountry, setTransformedCountry] = useState(false);
+
+  const yearHandleButtonClick = () => {
+    setTransformedYear(!transformedYear);
   };
+
+  // const countryHandleButtonClick = () => {
+  //   setTransformedCountry(!transformedCountry);
+  // };
 
   const fetchYearData = async () => {
     const fetchData = async () => {
       const reponse = await fetch(pathname + "/api/setup-calendar/get-years");
       const res = await reponse.json();
-      const modifiedData = res.years.map((y) => ({
+      //set year list
+      const modifiedYearData = res.years.map((y) => ({
         name: y.year,
         value: y.year,
       }));
-
-      const exists = modifiedData.find((item) => item.name == currentYear);
-
-      if (!exists) {
-        modifiedData.unshift({ name: currentYear, value: currentYear });
+      const existsYear = modifiedYearData.find(
+        (item) => item.name == currentYear
+      );
+      if (!existsYear) {
+        modifiedYearData.unshift({ name: currentYear, value: currentYear });
       }
-      setYearList(modifiedData);
+      setYearList(modifiedYearData);
+
+      // //set country list
+      // const modifiedCountryData = res.countries.map((y) => ({
+      //   name: y.country,
+      //   value: y.country,
+      // }));
+      // const existsCounrty = modifiedCountryData.find(
+      //   (item) => item.name == currentCountry
+      // );
+      // console.log("res.countries", modifiedCountryData, res.countries);
+
+      // if (!existsCounrty) {
+      //   modifiedCountryData.unshift({
+      //     name: currentCountry,
+      //     value: currentCountry,
+      //   });
+      // }
+      // setCountryList(modifiedCountryData);
     };
     // call the function
     fetchData().catch(console.error);
@@ -90,8 +135,8 @@ export default function Calendar() {
         tmpYearList.unshift({ name: newYear, value: newYear });
       }
       setYearList(tmpYearList);
-      setSelectedKey(new Set([newYear.toString()]));
-      handleButtonClick();
+      setSelectedYearKey(new Set([newYear.toString()]));
+      yearHandleButtonClick();
     } else {
       toast.info(`Year sholud be 4 numbers but got ${newYear.length}`, {
         position: "top-right",
@@ -124,26 +169,32 @@ export default function Calendar() {
       <div>
         <Navbar />
         <div className="flex items-center justify-center p-4 flex-col">
-          {/* sel year - {selectedValue} {JSON.stringify(yearList)} */}
+          {/* sel year - {selectedYearValue} {country} */}
           <div className="flex">
-            <div className="">
+            <div className="flex flex-col gap-2 w-1/6">
               <ListboxWrapper>
+                <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-2">
+                  <span className="text-indigo-600">Year list</span>
+                </span>
                 <NextListView
-                  value={selectedKey}
-                  onChange={setSelectedKey}
+                  value={selectedYearKey}
+                  onChange={setSelectedYearKey}
                   listArray={yearList}
                 />
-                <Button
-                  color="primary"
-                  variant="bordered"
-                  startContent={<MdNewLabel className="h-6 w-6" />}
-                  onClick={handleButtonClick}
-                >
-                  Add new
-                </Button>
+                <div className="flex justify-end">
+                  <Button
+                    color="primary"
+                    variant="bordered"
+                    startContent={<MdNewLabel className="h-6 w-6" />}
+                    onClick={yearHandleButtonClick}
+                    className="ml-auto"
+                  >
+                    Add new
+                  </Button>
+                </div>
                 <div
                   className={`${
-                    transformed
+                    transformedYear
                       ? "transform transition-transform ease-out duration-300 flex gap-2 flex-col"
                       : "hidden"
                   }`}
@@ -158,24 +209,27 @@ export default function Calendar() {
                     value={newYear}
                   />
                   <Button color="primary" onClick={addnewYear}>
-                    Save
+                    Add
                   </Button>
                 </div>
               </ListboxWrapper>
-              {/* <Listbox
-                items={years}
-                aria-label="Dynamic Actions"
-                onAction={(key) => alert(key)}
-              >
-                {years.map((year) => (
-                  <ListboxItem key={year} value={year}>
-                    {year}
-                  </ListboxItem>
-                ))}
-              </Listbox> */}
+              <ListboxWrapper>
+                <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-2">
+                  <span className="text-indigo-600">Country list</span>
+                </span>
+                <CountrySelector
+                  id={"country-selector"}
+                  open={isOpen}
+                  onToggle={() => setIsOpen(!isOpen)}
+                  onChange={setCountry}
+                  selectedValue={COUNTRIES.find(
+                    (option) => option.value === country
+                  )}
+                />
+              </ListboxWrapper>
             </div>
-            <div className="">
-              <SetupCalendar year={selectedValue} />
+            <div className="w-5/6">
+              <SetupCalendar year={selectedYearValue} country={country} />
             </div>
           </div>
         </div>

@@ -77,15 +77,21 @@ model timeallocdetails{
   remark    String  
 }
 
-model calanderdatasource{
+model calanderheaderdata{
+  calanderid       Int      @id @default(autoincrement())
+  year String
+  country String
+}
+
+model calanderdatasourcedata{
   calanderdatasourceid       Int      @id @default(autoincrement())
+  calanderid String
   name String
   location String
   startDate String
   endDate String
   color String
   uniqueKey String
-  year String
 }
 
 model categories{

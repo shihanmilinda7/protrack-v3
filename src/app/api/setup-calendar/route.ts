@@ -10,18 +10,26 @@ export async function GET(request: Request) {
   let res;
 
   const tmpYear: any = searchParams.get("year");
+  const tmpCountry: any = searchParams.get("country");
 
   try {
     await prisma.$transaction(async (tx) => {
-      const dataSource = await tx.calanderdatasource.findMany({
+      const headerData = await tx.calanderheaderdata.findMany({
         where: {
           year: tmpYear,
+          country: tmpCountry,
         },
       });
-      if (dataSource.length > 0) {
-        res = { message: "SUCCESS", dataSource };
+
+      if (headerData.length > 0) {
+        const dataSource = await tx.calanderdatasourcedata.findMany({
+          where: {
+            calanderid: headerData[0].calanderid.toString(),
+          },
+        });
+        res = { message: "SUCCESS", headerData, dataSource };
       } else {
-        res = { message: "SUCCESS", dataSource: [] };
+        res = { message: "SUCCESS", headerData: [], dataSource: [] };
       }
       return "";
     });
@@ -34,39 +42,76 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { dataSource, year } = await request.json();
+  const { calanderid, dataSource, year, country } = await request.json();
   let res;
+  // console.log(
+  //   "calanderid, dataSource, year, country",
+  //   calanderid,
+  //   dataSource,
+  //   year,
+  //   country
+  // );
   try {
     await prisma.$transaction(async (tx) => {
-      const dataExists = await tx.calanderdatasource.findFirst({
+      const dataExists = await tx.calanderheaderdata.findFirst({
         where: {
           year: year,
+          country: country,
         },
       });
 
       if (dataExists) {
-        await tx.calanderdatasource.deleteMany({
-          where: { year },
+        await tx.calanderdatasourcedata.deleteMany({
+          where: { calanderid: calanderid.toString() },
         });
+
+        for (let i = 0; i < dataSource.length; i++) {
+          const element = dataSource[i];
+          await tx.calanderdatasourcedata.create({
+            data: {
+              calanderid: calanderid.toString(),
+              name: element.name,
+              location: element.location,
+              startDate: element.startDate,
+              endDate: element.endDate,
+              color: element.color,
+              uniqueKey: element.uniqueKey,
+            },
+          });
+        }
+      } else {
+        const response = await tx.calanderheaderdata.create({
+          data: {
+            year: year.toString(),
+            country: country,
+          },
+        });
+        if (!response.calanderid) {
+          throw new Error(`Calander enterd`);
+        }
+
+        const headerId: any = response.calanderid;
+        if (headerId) {
+          for (let i = 0; i < dataSource.length; i++) {
+            const element = dataSource[i];
+            await tx.calanderdatasourcedata.create({
+              data: {
+                calanderid: headerId.toString(),
+                name: element.name,
+                location: element.location,
+                startDate: element.startDate,
+                endDate: element.endDate,
+                color: element.color,
+                uniqueKey: element.uniqueKey,
+              },
+            });
+          }
+        }
       }
+
       // const users = await tx.calanderdatasource.createMany({
       //   data: dataSource,
       // });
-
-      for (let i = 0; i < dataSource.length; i++) {
-        const element = dataSource[i];
-        await tx.calanderdatasource.create({
-          data: {
-            name: element.name,
-            location: element.location,
-            startDate: element.startDate,
-            endDate: element.endDate,
-            color: element.color,
-            uniqueKey: element.uniqueKey,
-            year: year.toString(),
-          },
-        });
-      }
 
       res = { message: "SUCCESS" };
       return "";
