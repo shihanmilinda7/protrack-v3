@@ -48,7 +48,7 @@ export const ProjectTaskTable = ({
           </TableHeader>
           <TableBody>
             {taskRowObjects?.map((tableRow: any, index: number) =>
-              tableRow.hasOwnProperty("rowStatus") ? null : (
+              tableRow.hasOwnProperty("rowStatus") || tableRow.show == false ? null : (
                 <TableRow key={tableRow.taskid} className="">
                   <TableCell className="w-10">{index + 1}</TableCell>
                   <TableCell className="w-40">

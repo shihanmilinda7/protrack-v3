@@ -16,11 +16,14 @@ import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { Button } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import ConfirmAlertbox from "@/app/components/common-comp/confirm-alertbox";
 import ProjectAssignScreen from "@/app/components/project/project-assign";
 import { setCurPrjTaskRowOj } from "@/store/projectAssignSaveSlice";
 import { useDispatch } from "react-redux";
+import { MdOutlineArrowBack } from "react-icons/md";
+import SearchFilter from "@/app/components/common-comp/input-fields/search-filter";
+import { FaSearch } from "react-icons/fa";
 
 export default function NewProject() {
   //get pathname
@@ -56,8 +59,8 @@ export default function NewProject() {
   const [enddate, setEnddate] = useState("");
   const [projectstatus, setProjectstatus] = useState(new Set([]));
   // const [pageReload, setPageReload] = useState(false);
-
-  const [taskRowObjects, setTaskRowObjects] = useState<TaskObjectTypes[]>([]);
+  const [search, setSearch] = useState("");
+  const [taskRowObjects, setTaskRowObjects] = useState<any[]>([]);
   const [updateScreen, setUpdateScreen] = useState(false);
 
   const toggleAssignSave = () => {
@@ -120,8 +123,8 @@ export default function NewProject() {
         const res = await reponse.json();
         console.log("res", res);
         const project = res.project[0];
-        const projectTasks = res.projectTasks;
-        console.log("project.projectid", projectTasks);
+        let projectTasks = res.projectTasks;
+        // console.log("project.projectid", projectTasks);
         //update states
         setProjectid(project.projectid);
         setProjectname(project.projectname);
@@ -129,6 +132,11 @@ export default function NewProject() {
         setStartdate(project.startdate);
         setEnddate(project.enddate);
         setProjectstatus(new Set([project.projectstatus]));
+
+        projectTasks = projectTasks.map((t) => {
+          return { ...t, show: true };
+        });
+
         setTaskRowObjects(projectTasks);
         // setPageReload(true)  project.projectstatus
       };
@@ -297,6 +305,19 @@ export default function NewProject() {
     }
   };
 
+  const searchEvent = (e) => {
+    setSearch(e.target.value);
+    const tmpArray = [...taskRowObjects];
+    tmpArray.forEach((obj) => {
+      if (obj.taskname.search(e.target.value) == -1) {
+        obj.show = false;
+      } else {
+        obj.show = true;
+      }
+    });
+    setTaskRowObjects(tmpArray);
+  };
+
   if (status === "loading") {
     return (
       <div>
@@ -315,7 +336,19 @@ export default function NewProject() {
       <div>
         <Navbar />
         <div className="">
-          <div className="flex items-center justify-center p-4">
+          <div className="flex items-center justify-center p-2">
+            <div className="pt-2 mr-2">
+              <Button
+                color="primary"
+                onClick={cancelButton}
+                variant="bordered"
+                startContent={
+                  <MdOutlineArrowBack className="inline-block h-5 w-5" />
+                }
+              >
+                Go back
+              </Button>
+            </div>
             <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto">
               <span className="text-indigo-600">
                 {!projectid ? "New Project" : "Project - " + projectname}
@@ -403,10 +436,26 @@ export default function NewProject() {
                   </div>
                 </div>
               </div>
-              <div className="flex px-3 w-full">
-                <span className="text-xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto">
+              <div className="flex px-3 w-full items-center justify-center">
+                <span className="text-xl font-semibold leading-none text-gray-900 select-none mr-2 pt-1">
                   <span className="text-indigo-600">Task list</span>
                 </span>
+                <div className="mr-auto">
+                  <Input
+                    autoFocus
+                    isClearable
+                    startContent={
+                      <FaSearch className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                    }
+                    color="primary"
+                    label=""
+                    placeholder="Type to search..."
+                    variant="flat"
+                    value={search}
+                    onChange={(e) => searchEvent(e)}
+                    onClear={() => setSearch("")}
+                  />
+                </div>
                 <div className={userRole == "User" ? "hidden" : "ml-auto"}>
                   <NewProjectTask
                     arrayUpdateFuntion={updateTaskRowObjectArray}
@@ -414,13 +463,14 @@ export default function NewProject() {
                   />
                 </div>
               </div>
-              <div className="w-full">
+              <div className="w-full max-h-[400px] overflow-y-auto">
                 <ProjectTaskTable
                   taskRowObjects={taskRowObjects}
                   arrayUpdateFuntion={updateTaskRowObjectArray}
                 />
               </div>
-              <div className="flex px-3 w-full">
+              {/* {JSON.stringify(taskRowObjects)} */}
+              <div className="flex px-3 w-full mt-2">
                 <div className="ml-auto">
                   <ConfirmAlertbox
                     buttonName="Cancel"

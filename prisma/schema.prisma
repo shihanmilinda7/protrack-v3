@@ -26,6 +26,7 @@ model staff{
   contactno    String   
   nic String
   designation String @default("user")
+  country String @default("LK")
   createdAt DateTime @default(now())
 }
 

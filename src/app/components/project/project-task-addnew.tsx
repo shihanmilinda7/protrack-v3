@@ -32,7 +32,7 @@ const NewProjectTask = ({
   delButton,
 }: {
   arrayUpdateFuntion: (
-    taskObject?: TaskObjectTypes,
+    taskObject?: any,
     index?: number,
     options?: { deleteTask?: boolean; deltaskid?: number }
   ) => void;
@@ -86,7 +86,7 @@ const NewProjectTask = ({
       setIsOpen(false);
       // setIsOpen(false);
       arrayUpdateFuntion(
-        { taskname, taskdescription, startdate, enddate },
+        { taskname, taskdescription, startdate, enddate, show: true },
         index
       );
     }

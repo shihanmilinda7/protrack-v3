@@ -58,6 +58,7 @@ export async function POST(request: Request) {
     username,
     role,
     designation,
+    country,
   } = await request.json();
   const hashedPassword = await bcrypt.hash(password, 10);
   console.log("hashedPassword", hashedPassword);
@@ -73,6 +74,7 @@ export async function POST(request: Request) {
           contactno,
           nic,
           designation,
+          country,
         },
       });
 
@@ -116,6 +118,7 @@ export async function PUT(request: Request) {
     userid,
     role,
     designation,
+    country,
   } = await request.json();
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -131,6 +134,7 @@ export async function PUT(request: Request) {
           contactno,
           nic,
           designation,
+          country,
         },
       });
 

@@ -13,6 +13,9 @@ import NextSelectInputField from "../common-comp/nextui-input-fields/next-select
 import { handleSelectChangeEvent } from "../utils";
 import { MdOutlineEditNote } from "react-icons/md";
 import IconConfirmAlertbox from "../common-comp/icon-confirm-alertbox";
+import CountrySelector from "../country-selector/selector";
+import { COUNTRIES } from "../country-selector/countries";
+import { SelectMenuOption } from "../country-selector/types";
 
 type ParamTypes = {
   buttonName: string;
@@ -62,6 +65,11 @@ const StaffAddNew = (params: ParamTypes) => {
   const closeButtonAction = () => {
     setSuccessfulToast(false);
   };
+
+  const [isCountryListOpen, setIsCountryListOpen] = useState(false);
+  const [country, setCountry] = useState<any["value"]>(
+    params.selRowData?.country ?? "LK"
+  );
 
   const customStyles = {
     overlay: {
@@ -153,6 +161,7 @@ const StaffAddNew = (params: ParamTypes) => {
       username,
       Role,
       Designation,
+      country,
     });
     try {
       //check input field empty or not
@@ -197,6 +206,7 @@ const StaffAddNew = (params: ParamTypes) => {
                 username,
                 role: role.values().next().value,
                 designation: designation.values().next().value,
+                country,
               }),
             });
             const res = await responseNewStaff.json();
@@ -247,6 +257,7 @@ const StaffAddNew = (params: ParamTypes) => {
       username,
       Role,
       Designation,
+      country,
     });
 
     try {
@@ -297,6 +308,7 @@ const StaffAddNew = (params: ParamTypes) => {
                 username,
                 role: role.values().next().value,
                 designation: designation.values().next().value,
+                country,
               }),
             });
             const res = await responseUpdateStaff.json();
@@ -500,6 +512,19 @@ const StaffAddNew = (params: ParamTypes) => {
                   label="NIC"
                   value={nic}
                   onChange={(e) => setNic(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="-mx-3 flex flex-wrap ">
+              <div className="w-full">
+                <CountrySelector
+                  id={"country-selector"}
+                  open={isCountryListOpen}
+                  onToggle={() => setIsCountryListOpen(!isCountryListOpen)}
+                  onChange={setCountry}
+                  selectedValue={COUNTRIES.find(
+                    (option) => option.value === country
+                  )}
                 />
               </div>
             </div>

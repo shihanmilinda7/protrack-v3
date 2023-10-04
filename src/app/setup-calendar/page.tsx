@@ -174,6 +174,20 @@ export default function Calendar() {
             <div className="flex flex-col gap-2 w-1/6">
               <ListboxWrapper>
                 <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-2">
+                  <span className="text-indigo-600">Country list</span>
+                </span>
+                <CountrySelector
+                  id={"country-selector"}
+                  open={isOpen}
+                  onToggle={() => setIsOpen(!isOpen)}
+                  onChange={setCountry}
+                  selectedValue={COUNTRIES.find(
+                    (option) => option.value === country
+                  )}
+                />
+              </ListboxWrapper>
+              <ListboxWrapper>
+                <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-2">
                   <span className="text-indigo-600">Year list</span>
                 </span>
                 <NextListView
@@ -212,20 +226,6 @@ export default function Calendar() {
                     Add
                   </Button>
                 </div>
-              </ListboxWrapper>
-              <ListboxWrapper>
-                <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-2">
-                  <span className="text-indigo-600">Country list</span>
-                </span>
-                <CountrySelector
-                  id={"country-selector"}
-                  open={isOpen}
-                  onToggle={() => setIsOpen(!isOpen)}
-                  onChange={setCountry}
-                  selectedValue={COUNTRIES.find(
-                    (option) => option.value === country
-                  )}
-                />
               </ListboxWrapper>
             </div>
             <div className="w-5/6">

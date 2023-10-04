@@ -8,13 +8,21 @@ import { UserType } from "../staff/types";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { FaKey, FaUser } from "react-icons/fa";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
   const [username, setUsername] = useState("admin");
   const [password, setPassword] = useState("admin");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // const { userId, setUserId, data, setData } = useGlobalContext();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const inputType = showPassword ? "text" : "password";
 
   const router = useRouter();
 
@@ -195,13 +203,26 @@ const Login = () => {
                       className="z-50 w-full content-center text-base px-4 py-2 border-b rounded-2xl border-gray-300 focus:outline-none focus:border-blue-500"
                       id="password"
                       name="password"
-                      type="password"
+                      type={inputType}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       autoComplete="current-password"
                       placeholder="Enter your password"
                       onKeyDown={handleKeyPress}
                     />
+                    <span className="text-gray-500 pr-2">
+                      {showPassword ? (
+                        <AiFillEyeInvisible
+                          className="inline-block h-6 w-6"
+                          onClick={togglePasswordVisibility}
+                        />
+                      ) : (
+                        <AiFillEye
+                          className="inline-block h-6 w-6"
+                          onClick={togglePasswordVisibility}
+                        />
+                      )}
+                    </span>
                   </div>
                 </div>
                 <div className="flex items-center justify-between mt-10 mb-8">
