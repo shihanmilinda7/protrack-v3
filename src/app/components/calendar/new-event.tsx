@@ -23,14 +23,16 @@ const NewCalendarEvent = ({
   selectedDate,
   updatDataSource,
   nextid,
-  dataSource,
+  selDataSource,
+  dateChange,
 }: {
   isOpenPopup: any;
   closePopup: () => void;
   selectedDate: any;
-  updatDataSource: (newSource: any) => void;
+  updatDataSource: (newSource: any, deleteItem?: any) => void;
   nextid: any;
-  dataSource: any[];
+  selDataSource: any;
+  dateChange: any;
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -53,9 +55,7 @@ const NewCalendarEvent = ({
   const { data: session, status } = useSession();
 
   const [datasourceid, setDatasourceid] = useState("");
-  const [name, setName] = useState("");
-
-  const [datetype, setDatetype] = useState("");
+  const [note, setNote] = useState("");
   const [colourCode, setColourCode] = useState("");
 
   const customStyles = {
@@ -86,25 +86,55 @@ const NewCalendarEvent = ({
   ];
   useEffect(() => {
     setIsOpen(isOpenPopup);
-    if (isOpenPopup) {
-      const tmpDate = new Date(selectedDate);
-      console.log("tmpDate.toISOString()", tmpDate.toISOString());
-      // const dateFound = dataSource.find(d => d.startDate == )
-    }
-    // test();
-  }, [isOpenPopup]);
+  }, [isOpenPopup, dateChange]);
 
-  const saveEvent = () => {
+  useEffect(() => {
+    setNote(selDataSource ? selDataSource.name : "");
+    setColourCode(selDataSource ? selDataSource.color : "");
+  }, [selDataSource, dateChange]);
+
+  // const submitButtonHandler = async (
+  //   e: React.MouseEvent<HTMLButtonElement>
+  // ) => {
+  //   e.preventDefault();
+  //   if (selDataSource) {
+  //     // update();
+  //   } else {
+  //     addnew();
+  //   }
+  // };
+
+  const addnew = () => {
     const sample = {
       id: nextid,
-      name: "Google I/O",
+      name: note,
       location: "San Francisco, CA",
       startDate: new Date(selectedDate),
       endDate: new Date(selectedDate),
       color: colourCode,
-      daytype: "holiday",
+      uniqueKey: selectedDate,
     };
     updatDataSource(sample);
+    closePopup();
+  };
+
+  // const update = () => {
+  //   const sample = {
+  //     id: selDataSource.id,
+  //     name: note,
+  //     location: "San Francisco, CA",
+  //     startDate: new Date(selectedDate),
+  //     endDate: new Date(selectedDate),
+  //     color: colourCode,
+  //     uniqueKey: selectedDate,
+  //   };
+  //   // console.log("selDataSource.id", selDataSource.id);
+  //   updatDataSource(sample, selDataSource.id);
+  //   closePopup();
+  // };
+
+  const deleteDatasource = () => {
+    updatDataSource({}, selectedDate);
     closePopup();
   };
   return (
@@ -132,9 +162,9 @@ const NewCalendarEvent = ({
               <div className="relative">
                 <div>
                   <NextAutoFocusTextInputField
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    label="Note"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
                   />
                 </div>
                 <div className="flex flex-col gap-3 mt-3">
@@ -168,11 +198,11 @@ const NewCalendarEvent = ({
                 </Button>
               </div>
               <div>
-                <Button color="primary" onClick={saveEvent}>
+                <Button color="primary" onClick={addnew}>
                   Save
                 </Button>
               </div>
-              <div className={datasourceid ? "" : "hidden"}>
+              <div className={selDataSource ? "" : "hidden"}>
                 <Button
                   isIconOnly
                   color="warning"
@@ -180,7 +210,7 @@ const NewCalendarEvent = ({
                   aria-label="Create Item"
                 >
                   <RiDeleteBin5Line
-                    // onClick={handleDelete}
+                    onClick={deleteDatasource}
                     className="inline-block h-6 w-6 text-red-700 hover:text-red-500 cursor-pointer"
                   />
                 </Button>
