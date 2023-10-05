@@ -28,7 +28,7 @@ export const PrjAssignTaskTimeAllocTable = ({
   projectid: number;
   taskRowObjectsIn: any[];
   tablePagination: number;
-  toggleSaveFlag: () =>( void);
+  toggleSaveFlag: () => void;
 }) => {
   let pathname: string = "";
   const router = useRouter();
@@ -71,6 +71,10 @@ export const PrjAssignTaskTimeAllocTable = ({
   const timeAllocationSave = useSelector(
     (state: any) => state.timeAllocationSaveReducer.timeAllocationSaveState
   );
+  const reduxDate = useSelector(
+    (state: any) => state.timeAllocDateReducer.date
+  );
+
   // const reduxDate = useSelector(
   //   (state: any) => state.timeAllocDateReducer.date
   // );
@@ -92,6 +96,10 @@ export const PrjAssignTaskTimeAllocTable = ({
       toggleSaveFlag();
     }
   }, [onactive]);
+
+  useEffect(() => {
+    setDate1(reduxDate);
+  }, [reduxDate]);
 
   const updateTableRows = (newVal: any) => {
     const updatedArray = taskRows.map((r) =>

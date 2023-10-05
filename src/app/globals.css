@@ -241,3 +241,31 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.fc-header-toolbar {
+  background-color: #5a67d8;
+  color: white;
+}
+
+.fc-daygrid-day:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+
+.fc-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.fc-daygrid-day-frame {
+  border: 1px solid #c0c0c0;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #5a67d8;
+  color: rgb(255, 255, 255);
+}

@@ -99,6 +99,9 @@ const Navbar = () => {
         case "setup-calendar":
           router.push("/setup-calendar");
           break;
+        case "timelogs":
+          router.push("/timelogs");
+          break;
         case "sign-out":
           await signOut();
           window.location.href = "/";
@@ -301,7 +304,27 @@ const Navbar = () => {
                     : nonActiveStyle
                 }
               >
-                Time logs
+                xTime logs
+              </button>
+            </li>
+            <li
+              className={
+                userRole == "Admin" ||
+                userRole == "Manager" ||
+                userRole == "User"
+                  ? ""
+                  : "hidden"
+              }
+            >
+              <button
+                onClick={() => navButtonHandler("timelogs")}
+                className={
+                  currentRoute === "/timelogs"
+                    ? activeStyle
+                    : nonActiveStyle
+                }
+              >
+                Time log
               </button>
             </li>
             <li

@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   const { staffid, projectid, curPrjTaskRowOj } = await request.json();
   let message: string = "SUCCESS";
 
-  console.log("taskRows", curPrjTaskRowOj, staffid, projectid);
+  // console.log("taskRows", curPrjTaskRowOj, staffid, projectid);
   try {
     await prisma.$transaction(async (tx) => {
       // 1. addnew projectassign .
