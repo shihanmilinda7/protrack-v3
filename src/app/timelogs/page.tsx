@@ -120,8 +120,12 @@ export default function Timelog() {
 
   const eventMouseEnter = (info) => {
     toast.info(`${info.event.title}`, {
-      position: "top-left",
-      // position: toast.POSITION.TOP_CENTER,
+      // position: {
+      //   top: "50px",
+      //   right: "20px",
+      // },
+      // position: "top-left",
+      position: toast.POSITION.BOTTOM_CENTER,
       autoClose: false, // This ensures the notification doesn't auto-close
       closeOnClick: false, // This prevents the notification from closing when clicked
       theme: "colored",
