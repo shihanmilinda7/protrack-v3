@@ -65,7 +65,7 @@ const Navbar = () => {
     if (!projectAssignSave || !timeAllocationSave) {
       toast.error("Please Save changes!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -319,9 +319,7 @@ const Navbar = () => {
               <button
                 onClick={() => navButtonHandler("timelogs")}
                 className={
-                  currentRoute === "/timelogs"
-                    ? activeStyle
-                    : nonActiveStyle
+                  currentRoute === "/timelogs" ? activeStyle : nonActiveStyle
                 }
               >
                 Time log

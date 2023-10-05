@@ -78,7 +78,7 @@ export const PrjAssignTaskTable = () => {
   //     if (jsonResponse == "SUCCESS") {
   //       toast.success("Project created successfully!", {
   //         position: "top-right",
-  //         autoClose: 3000,
+  //         autoClose: 1000,
   //         hideProgressBar: false,
   //         closeOnClick: true,
   //         pauseOnHover: true,
@@ -93,7 +93,7 @@ export const PrjAssignTaskTable = () => {
   //   } catch (error) {
   //     toast.error(`${error}`, {
   //       position: "top-right",
-  //       autoClose: 5000,
+  //       autoClose: 1000,
   //       hideProgressBar: false,
   //       closeOnClick: true,
   //       pauseOnHover: true,

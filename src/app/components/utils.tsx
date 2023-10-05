@@ -25,7 +25,7 @@ export const deletePo = async (pathname: any, purchaseorderid: any) => {
   if (res == "SUCCESS") {
     toast.success("Purchase order deleted successfully!", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -38,7 +38,7 @@ export const deletePo = async (pathname: any, purchaseorderid: any) => {
   } else {
     toast.error("Error!", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

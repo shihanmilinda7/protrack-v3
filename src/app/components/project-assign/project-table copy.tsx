@@ -55,7 +55,7 @@
 //       } else {
 //         toast.error("Please Save changes!", {
 //           position: "top-right",
-//           autoClose: 5000,
+//           autoClose: 1000,
 //           hideProgressBar: false,
 //           closeOnClick: true,
 //           pauseOnHover: true,
@@ -67,7 +67,7 @@
 //     } else {
 //       toast.info("No staff selected!", {
 //         position: "top-right",
-//         autoClose: 5000,
+//         autoClose: 1000,
 //         hideProgressBar: false,
 //         closeOnClick: true,
 //         pauseOnHover: true,

@@ -48,7 +48,7 @@ const Login = () => {
       if (response?.error) {
         toast.error("Username or Password Incorrect!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -73,7 +73,7 @@ const Login = () => {
       console.log("System error please reload!", error);
       toast.error("error", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -112,7 +112,7 @@ const Login = () => {
     // } else {
     //   toast.error('Username or Password Incorrect!', {
     //     position: "top-right",
-    //     autoClose: 5000,
+    //     autoClose: 1000,
     //     hideProgressBar: false,
     //     closeOnClick: true,
     //     pauseOnHover: true,

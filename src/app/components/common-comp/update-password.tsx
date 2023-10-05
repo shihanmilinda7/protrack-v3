@@ -62,7 +62,7 @@ const UpdatePassword = () => {
         if (newpassword != confirmnewpassword) {
           toast.info("Password does not match!", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -87,7 +87,7 @@ const UpdatePassword = () => {
           if (jsonResponse.message == "INCORRECT_OLD") {
             toast.info("Incorrect Old Password!", {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: false,
@@ -98,7 +98,7 @@ const UpdatePassword = () => {
           } else if (jsonResponse.message == "SUCCESS") {
             toast.success("Password updated successfully!", {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: true,
@@ -116,7 +116,7 @@ const UpdatePassword = () => {
     } catch (error) {
       toast.error("Error!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

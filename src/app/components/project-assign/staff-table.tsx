@@ -52,7 +52,7 @@ export const PrjAssignStaffTable = ({
     } else {
       toast.error("Please Save changes!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -79,7 +79,9 @@ export const PrjAssignStaffTable = ({
               <th className="w-40 text-left py-5 px-1 text-sm font-bold">
                 Designation
               </th>
-              <th className="w-60 text-left py-5 px-1 text-sm font-bold">Assign tasks</th>
+              <th className="w-60 text-left py-5 px-1 text-sm font-bold">
+                Assign tasks
+              </th>
               {/* {tableHeads.map((head) => (
                 <th
                   key={head}

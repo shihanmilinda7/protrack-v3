@@ -38,7 +38,7 @@ export default function Timelog() {
     if (!timeAllocationSave) {
       toast.error("Please Save changes!", {
         position: "top-right",
-        autoClose: 3000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -58,7 +58,7 @@ export default function Timelog() {
         description: "This is the description for Event 2.",
       },
       start: "2023-10-05",
-      backgroundColor: "red", // Set a background color
+      backgroundColor: "#297531", // Set a background color
       borderColor: "darkblue", // Set a border color
     },
     {
@@ -67,7 +67,7 @@ export default function Timelog() {
         description: "This is the description for Event 2.",
       },
       start: "2023-10-10",
-      backgroundColor: "red", // Set a background color
+      backgroundColor: "#297531", // Set a background color
       borderColor: "darkblue", // Set a border color
     },
     {
@@ -89,12 +89,12 @@ export default function Timelog() {
       borderColor: "darkblue", // Set a border color
     },
     {
-      title: "Event 2",
+      title: "Holiday",
       start: "2023-10-15",
       extendedProps: {
-        description: "This is the description for Event 2.",
+        description: "Poya day",
       },
-      backgroundColor: "green",
+      backgroundColor: "red",
       borderColor: "darkgreen",
     },
   ];
@@ -136,7 +136,10 @@ export default function Timelog() {
     return eventA;
   };
   ////////////////////////////////
-
+  const handlePrevNextClick = (info) => {
+    console.log('Clicked on the "prev" or "next" button:', info);
+    // Add your custom logic here
+  };
   // document
   //   .getElementById("my-next-button")
   //   .addEventListener("click", function () {
@@ -190,6 +193,7 @@ export default function Timelog() {
               end: "today prev,next", // will normally be on the right. if RTL, will be on the left
             }}
             height={"90vh"}
+            datesSet={handlePrevNextClick}
           />
         </div>
       </div>

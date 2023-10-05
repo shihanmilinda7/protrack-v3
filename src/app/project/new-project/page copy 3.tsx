@@ -198,7 +198,7 @@
 //   //         if (jsonResponse == "SUCCESS") {
 //   //           toast.success("Project created successfully!", {
 //   //             position: "top-right",
-//   //             autoClose: 3000,
+//   //             autoClose: 1000,
 //   //             hideProgressBar: false,
 //   //             closeOnClick: true,
 //   //             pauseOnHover: true,
@@ -211,7 +211,7 @@
 //   //       } else {
 //   //         toast.info("Project should be contain at least one task!", {
 //   //           position: "top-right",
-//   //           autoClose: 5000,
+//   //           autoClose: 1000,
 //   //           hideProgressBar: false,
 //   //           closeOnClick: true,
 //   //           pauseOnHover: true,
@@ -224,7 +224,7 @@
 //   //   } catch (error) {
 //   //     toast.error("Error!", {
 //   //       position: "top-right",
-//   //       autoClose: 5000,
+//   //       autoClose: 1000,
 //   //       hideProgressBar: false,
 //   //       closeOnClick: true,
 //   //       pauseOnHover: true,
@@ -269,7 +269,7 @@
 //   //         if (jsonResponse == "SUCCESS") {
 //   //           toast.success("Project updated successfully!", {
 //   //             position: "top-right",
-//   //             autoClose: 3000,
+//   //             autoClose: 1000,
 //   //             hideProgressBar: false,
 //   //             closeOnClick: true,
 //   //             pauseOnHover: true,
@@ -282,7 +282,7 @@
 //   //       } else {
 //   //         toast.info("Project should be contain at least one task!", {
 //   //           position: "top-right",
-//   //           autoClose: 5000,
+//   //           autoClose: 1000,
 //   //           hideProgressBar: false,
 //   //           closeOnClick: true,
 //   //           pauseOnHover: true,
@@ -295,7 +295,7 @@
 //   //   } catch (error) {
 //   //     toast.error("Error!", {
 //   //       position: "top-right",
-//   //       autoClose: 5000,
+//   //       autoClose: 1000,
 //   //       hideProgressBar: false,
 //   //       closeOnClick: true,
 //   //       pauseOnHover: true,

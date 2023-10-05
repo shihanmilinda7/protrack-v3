@@ -140,7 +140,7 @@ export default function Calendar() {
     } else {
       toast.info(`Year sholud be 4 numbers but got ${newYear.length}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

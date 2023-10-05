@@ -76,7 +76,7 @@
 //     if (!save) {
 //       toast.error("Please Save changes!", {
 //         position: "top-right",
-//         autoClose: 5000,
+//         autoClose: 1000,
 //         hideProgressBar: false,
 //         closeOnClick: true,
 //         pauseOnHover: true,
@@ -87,7 +87,7 @@
 //     } else {
 //       // toast.error("No any changes!", {
 //       //   position: "top-right",
-//       //   autoClose: 5000,
+//       //   autoClose: 1000,
 //       //   hideProgressBar: false,
 //       //   closeOnClick: true,
 //       //   pauseOnHover: true,
@@ -216,7 +216,7 @@
 //     if (!save) {
 //       toast.error("Please Save changes!", {
 //         position: "top-right",
-//         autoClose: 5000,
+//         autoClose: 1000,
 //         hideProgressBar: false,
 //         closeOnClick: true,
 //         pauseOnHover: true,
@@ -271,7 +271,7 @@
 //       if (!save) {
 //         toast.error("Please Save changes!", {
 //           position: "top-right",
-//           autoClose: 5000,
+//           autoClose: 1000,
 //           hideProgressBar: false,
 //           closeOnClick: true,
 //           pauseOnHover: true,

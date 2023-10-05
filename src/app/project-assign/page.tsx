@@ -84,7 +84,7 @@ export default function ProjectAssign() {
     if (!save) {
       toast.error("Please Save changes!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -95,7 +95,7 @@ export default function ProjectAssign() {
     } else {
       // toast.error("No any changes!", {
       //   position: "top-right",
-      //   autoClose: 5000,
+      //   autoClose: 1000,
       //   hideProgressBar: false,
       //   closeOnClick: true,
       //   pauseOnHover: true,
@@ -225,7 +225,7 @@ export default function ProjectAssign() {
     if (!save) {
       toast.error("Please Save changes!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -337,7 +337,7 @@ export default function ProjectAssign() {
       if (!save) {
         toast.error("Please Save changes!", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -428,11 +428,11 @@ export default function ProjectAssign() {
             <div>
               {taskRowObjects && (
                 <PrjAssignTaskTable
-                  // staffid={staffid}
-                  // projectid={projectid}
-                  // taskRowObjectsIn={taskRowObjects}
-                  // tablePagination={taskTablePage}
-                  // toggleSaveFlag={toggleSaveFlag}
+                // staffid={staffid}
+                // projectid={projectid}
+                // taskRowObjectsIn={taskRowObjects}
+                // tablePagination={taskTablePage}
+                // toggleSaveFlag={toggleSaveFlag}
                 />
               )}
               {/* <Pagination

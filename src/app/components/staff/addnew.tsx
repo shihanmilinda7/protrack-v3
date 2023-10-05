@@ -170,7 +170,7 @@ const StaffAddNew = (params: ParamTypes) => {
         if (password != confirmpassword) {
           toast.info("Password does not match!", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -184,7 +184,7 @@ const StaffAddNew = (params: ParamTypes) => {
           if (tmpUsernameValidation != "FAIL") {
             toast.info("Username already exists!", {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: false,
@@ -218,7 +218,7 @@ const StaffAddNew = (params: ParamTypes) => {
               }
               toast.success("Staff created successfully!", {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -233,7 +233,7 @@ const StaffAddNew = (params: ParamTypes) => {
     } catch (error) {
       toast.error("Error!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -267,7 +267,7 @@ const StaffAddNew = (params: ParamTypes) => {
         if (password != confirmpassword) {
           toast.info("Password does not match!", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: false,
@@ -284,7 +284,7 @@ const StaffAddNew = (params: ParamTypes) => {
           if (tmpUsernameValidation != "FAIL") {
             toast.info("Username already exists!", {
               position: "top-right",
-              autoClose: 3000,
+              autoClose: 1000,
               hideProgressBar: false,
               closeOnClick: true,
               pauseOnHover: false,
@@ -320,7 +320,7 @@ const StaffAddNew = (params: ParamTypes) => {
               }
               toast.success("Staff created successfully!", {
                 position: "top-right",
-                autoClose: 3000,
+                autoClose: 1000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -335,7 +335,7 @@ const StaffAddNew = (params: ParamTypes) => {
     } catch (error) {
       toast.error("Error!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -362,7 +362,7 @@ const StaffAddNew = (params: ParamTypes) => {
         }
         toast.success("Staff deleted successfully!", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -373,7 +373,7 @@ const StaffAddNew = (params: ParamTypes) => {
       } else {
         toast.error("Error!", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,

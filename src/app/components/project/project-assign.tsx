@@ -184,7 +184,7 @@ const ProjectAssignScreen = ({
       if (!save) {
         toast.error("Please Save changes2!", {
           position: "top-right",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -215,7 +215,7 @@ const ProjectAssignScreen = ({
       if (jsonResponse == "SUCCESS") {
         toast.success("Successfully assigned!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -230,7 +230,7 @@ const ProjectAssignScreen = ({
     } catch (error) {
       toast.error(`${error}`, {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

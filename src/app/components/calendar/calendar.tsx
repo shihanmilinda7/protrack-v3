@@ -118,7 +118,7 @@ export const SetupCalendar = ({
       if (res.message == "SUCCESS") {
         toast.success("Calendar updated successfully!", {
           position: "top-right",
-          autoClose: 3000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -131,7 +131,7 @@ export const SetupCalendar = ({
     } catch (error) {
       toast.error("Error!", {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -179,7 +179,9 @@ export const SetupCalendar = ({
         dateChange={dateChange}
       />
       <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto pl-3">
-        <span className="text-indigo-600">Calendar - {year} ({country})</span>
+        <span className="text-indigo-600">
+          Calendar - {year} ({country})
+        </span>
       </span>
       <div className="">
         <Calendar

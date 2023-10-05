@@ -7,15 +7,14 @@ export function inputFieldValidation(array) {
   for (const key in array) {
     if (!array[key]) {
       // console.log("array1[key]",Object.keys(array1),)
-      emptyArray.push(key + " ")
+      emptyArray.push(key + " ");
     }
   }
 
   if (emptyArray.length > 0) {
-
     toast.info(`${emptyArray} can not be empty!`, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 1000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -23,7 +22,6 @@ export function inputFieldValidation(array) {
       progress: undefined,
       theme: "colored",
     });
-
   }
   return emptyArray.length;
   // const array = [staffid, clientname, categoryid, location, visitcount]
@@ -34,13 +32,12 @@ export function inputFieldValidation(array) {
 
   //     emptyArray.push(Object.keys(array1)[index])
 
-
   //   }
   // }
   // console.log("emptyArray", emptyArray,)
   // toast.info(`${emptyArray} can not be empty!`, {
   //   position: "top-right",
-  //   autoClose: 5000,
+  //   autoClose: 1000,
   //   hideProgressBar: false,
   //   closeOnClick: true,
   //   pauseOnHover: true,
