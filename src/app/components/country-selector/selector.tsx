@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import { SelectMenuOption } from "./types";
 import { COUNTRIES } from "./countries";
+import { Input } from "@nextui-org/react";
+import { FaSearch } from "react-icons/fa";
 
 export interface CountrySelectorProps {
   id: string;
@@ -104,14 +106,28 @@ export default function CountrySelector({
             >
               <div className="sticky top-0 z-10 bg-white">
                 <li className=" text-gray-900 cursor-default select-none relative py-2 px-3">
-                  <input
+                  <Input
+                    autoFocus
+                    isClearable
+                    startContent={
+                      <FaSearch className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                    }
+                    color="primary"
+                    label=""
+                    placeholder="Search a country"
+                    variant="flat"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onClear={() => setQuery("")}
+                  />
+                  {/* <input
                     type="search"
                     name="search"
                     autoComplete={"off"}
                     className="focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     placeholder={"Search a country"}
                     onChange={(e) => setQuery(e.target.value)}
-                  />
+                  /> */}
                 </li>
                 <hr />
               </div>

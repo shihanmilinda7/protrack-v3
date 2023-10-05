@@ -203,7 +203,7 @@ export default function Calendar() {
                     onClick={yearHandleButtonClick}
                     className="ml-auto"
                   >
-                    Add new
+                    Add/Search
                   </Button>
                 </div>
                 <div
