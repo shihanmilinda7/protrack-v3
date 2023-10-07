@@ -305,7 +305,7 @@ const ProjectAssignScreen = ({
         </div>
         <div className="fixed bottom-4 right-5">
           <Tooltip content="Save">
-            <Button color="success" onClick={saveEvent}>
+            <Button color="primary" onClick={saveEvent}>
               Save
             </Button>
           </Tooltip>

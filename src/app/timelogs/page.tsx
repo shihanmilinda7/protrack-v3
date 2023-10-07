@@ -15,6 +15,7 @@ import TimelogModal from "../components/timelogs/edit-timelog";
 import { useSelector } from "react-redux";
 import { setDate } from "@/store/timeAllocDateSlice";
 import { useDispatch } from "react-redux";
+import TimelogAddNew from "../components/timelogs/timelog-addnew";
 
 export default function Timelog() {
   const router = useRouter();
@@ -175,7 +176,7 @@ export default function Timelog() {
           </span>
         </div>
         <div className="pl-4 pr-4">
-          <TimelogModal
+          <TimelogAddNew
             isOpenPopup={isOpen}
             closePopup={closePopup}
             selectedDate={selectedDate}

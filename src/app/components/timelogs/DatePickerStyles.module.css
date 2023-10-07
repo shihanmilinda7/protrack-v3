@@ -1,0 +1,20 @@
+.my-selected:not([disabled]) {
+  font-weight: bold;
+  border: 2px solid currentColor;
+  background-color: #5a67d8;
+  color: rgb(255, 255, 255);
+}
+.my-selected:hover:not([disabled]) {
+  border-color: blue;
+  color: blue;
+}
+.my-today {
+  font-weight: bold;
+  font-size: 140%;
+  color: rgb(0, 0, 0);
+}
+
+.complteddates {
+  background-color: rgb(21, 255, 0);
+  color: rgb(0, 0, 0);
+}
