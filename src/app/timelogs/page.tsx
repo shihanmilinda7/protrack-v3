@@ -230,7 +230,7 @@ export default function Timelog() {
         <Navbar />
         <div className="flex items-center justify-center p-4">
           <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto">
-            <span className="text-indigo-600">Time log </span>
+            <span className="text-indigo-600">Time log</span>
           </span>
         </div>
         <div className="pl-4 pr-4">

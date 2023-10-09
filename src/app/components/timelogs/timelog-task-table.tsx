@@ -177,7 +177,7 @@ export const TimelogTaskTable = ({
   return (
     <div className="md:px-2">
       <div className="shadow rounded border-b border-gray-200 w-full">
-        <span className="text-base leading-none text-gray-900 select-none pt-2 mr-auto">
+        <span className="text-base font-semibold leading-none text-gray-900 select-none pt-2 mr-auto flex justify-end mb-1">
           <span className="text-indigo-600">
             Status: {headerData.workingType}
           </span>

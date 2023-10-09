@@ -45,6 +45,7 @@ export const TimelogTaskTableRow = ({
   const [tableRows, setTableRows] = useState(timelogRowsIn);
   const [assignTasks, setAssignTasks] = useState([]);
 
+
   useEffect(() => {
     const q = { ...timelogRowIn };
     setTableRow(q);
@@ -116,13 +117,13 @@ export const TimelogTaskTableRow = ({
   };
 
   const updateData = (newObject: any) => {
-    console.log("newObject", newObject);
+    // console.log("newObject", newObject);
     setTableRow(newObject);
     updateTableRows(newObject);
   };
 
   return (
-    <tr className="even:bg-blue-gray-50/50">
+    <tr className={`even:bg-blue-gray-50/50`}>
       <td className="text-left py-1 px-4 font-bold w-5">
         <Button
           isIconOnly
