@@ -284,3 +284,18 @@ body {
   box-shadow: var(--shadow);
   z-index: 10;
 }
+
+.event-title {
+  font-weight: bold;
+  color: #000000;
+}
+
+.event-content {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.event-description {
+  color: #000000;
+  font-size: 12px;
+}

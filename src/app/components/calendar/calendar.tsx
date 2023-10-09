@@ -158,6 +158,7 @@ export const SetupCalendar = ({
         endDate: new Date(item.endDate),
         color: item.color,
         uniqueKey: item.uniqueKey,
+        dateType: item.dateType,
       }));
       setDataSource(modifiedData);
       setCalanderid(res.headerData[0]?.calanderid);

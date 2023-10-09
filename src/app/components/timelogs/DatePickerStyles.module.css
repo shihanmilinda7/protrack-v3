@@ -15,6 +15,20 @@
 }
 
 .complteddates {
-  background-color: rgb(21, 255, 0);
+  background-color: #03f0fc;
   color: rgb(0, 0, 0);
+}
+.custom-color-A {
+  background-color: #ff0000; /* Set custom color A */
+  color: #ffffff; /* Set the text color for custom color A */
+}
+
+.custom-color-B {
+  background-color: #00ff00; /* Set custom color B */
+  color: #000000; /* Set the text color for custom color B */
+}
+
+.custom-color-C {
+  background-color: #0000ff; /* Set custom color C */
+  color: #ffffff; /* Set the text color for custom color C */
 }

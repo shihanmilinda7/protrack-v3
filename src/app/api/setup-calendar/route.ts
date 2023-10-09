@@ -76,6 +76,7 @@ export async function POST(request: Request) {
               endDate: element.endDate,
               color: element.color,
               uniqueKey: element.uniqueKey,
+              dateType: element.dateType,
             },
           });
         }

@@ -114,7 +114,9 @@ export const TimelogTaskTableRow = ({
         <NextSelectInputField
           label=""
           value={
-            tableRow.projectid ? new Set([tableRow.projectid]) : new Set([])
+            tableRow.projectid
+              ? new Set([tableRow.projectid.toString()])
+              : new Set([])
           }
           onChange={(e) => projectSelectEvent(e)}
           optionValues={assignProjects}
@@ -123,7 +125,11 @@ export const TimelogTaskTableRow = ({
       <td className="text-left py-1 px-4 w-40">
         <NextSelectInputField
           label=""
-          value={tableRow.taskid ? new Set([tableRow.taskid]) : new Set([])}
+          value={
+            tableRow.taskid
+              ? new Set([tableRow.taskid.toString()])
+              : new Set([])
+          }
           onChange={(e) => taskSelectEvent(e)}
           optionValues={assignTasks}
         />

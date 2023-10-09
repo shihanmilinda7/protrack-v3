@@ -1,27 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { useSelector, useDispatch } from "react-redux";
-import { setDate } from "@/store/timeAllocDateSlice";
-import ConfirmAlertbox from "../common-comp/confirm-alertbox";
+
 import { useRouter } from "next/navigation";
-import {
-  setTimeAllocationSaved,
-  setTimeAllocationUnsaved,
-} from "@/store/timeAllocationSaveSlice";
-import NextDateInputField from "../common-comp/nextui-input-fields/next-date-input-fields";
-import NextAreaTextInputField from "../common-comp/nextui-input-fields/next-textarea-input-fields";
-import { Button } from "@nextui-org/react";
+
+import { Button, Tooltip } from "@nextui-org/react";
 import { TimelogTaskTableRow } from "./timelog-task-table-row";
 import { AiFillPlusCircle, AiOutlineUndo } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 export const TimelogTaskTable = ({
+  timelogDetailsIn,
   assignProjects,
-  staffid,
+  headerData,
+  toggleSaveFlag,
 }: {
+  timelogDetailsIn: any[];
   assignProjects: any[];
-  staffid: any;
+  headerData: any;
+  toggleSaveFlag: () => void;
 }) => {
   let pathname: string = "";
   const router = useRouter();
@@ -40,12 +37,21 @@ export const TimelogTaskTable = ({
   const [timelogRows, setTimelogRows] = useState([]);
   const [lastRemovedRow, setLastRemovedRow] = useState(null);
 
+  useEffect(() => {
+    const modifiedArray = timelogDetailsIn?.map((element) => ({
+      ...element, // Copy the existing properties
+      rowstatus: "u", // Add the new property
+    }));
+    setTimelogRows(modifiedArray);
+  }, [timelogDetailsIn]);
+
   // useEffect(() => {
   //   console.log("timelogRows", timelogRows);
   // }, [timelogRows]);
 
   const addRowFromHeader = () => {
-    const newRowId = Math.max(...timelogRows.map((row) => row.rowindex), 0) + 1;
+    const newRowId =
+      Math.max(...timelogRows?.map((row) => row.rowindex), 0) + 1;
     const newEmptyRow = {
       rowstatus: "a",
       rowindex: newRowId,
@@ -81,7 +87,7 @@ export const TimelogTaskTable = ({
   const removeRow = (rowData, rowIndex) => {
     const updatedTableData = timelogRows.map((row, index) => {
       if (index === rowIndex) {
-        if (row.purchaseorderdetailid) {
+        if (row.timelogdetailid) {
           return { ...row, rowstatus: "d" };
         } else {
           return { ...row, rowstatus: "r" };
@@ -101,7 +107,7 @@ export const TimelogTaskTable = ({
 
     const updatedTableData = timelogRows.map((row, index) => {
       if (index === lastRemovedRow.rowIndex) {
-        if (row.purchaseorderdetailid) {
+        if (row.timelogdetailid) {
           return { ...row, rowstatus: "u" };
         } else {
           return { ...row, rowstatus: "a" };
@@ -124,10 +130,59 @@ export const TimelogTaskTable = ({
     setTimelogRows(updatedArray);
   };
 
+  const saveEvent = async () => {
+    try {
+      const response = await fetch(pathname + "/api/timelogs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          timelogid: headerData.timelogid,
+          staffid: headerData.staffid,
+          date: headerData.date,
+          remark: headerData.remark,
+          workingType: headerData.workingType,
+          timelogRows,
+        }),
+      });
+      const res = await response.json();
+      if (res.message == "SUCCESS") {
+        toast.success("Successfully updated!", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        toggleSaveFlag();
+      }
+    } catch (error) {
+      toast.error("Error!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
+  };
+
   return (
     <div className="md:px-2">
       <div className="shadow rounded border-b border-gray-200 w-full">
-        {/* TimelogRows {JSON.stringify(timelogRows)} */}
+        <span className="text-base leading-none text-gray-900 select-none pt-2 mr-auto">
+          <span className="text-indigo-600">
+            Status: {headerData.workingType}
+          </span>
+        </span>
+
+        {/* {headerData.staffid} - {headerData.remark} - {headerData.workingType} -
+        {headerData.date} - TimelogRows {JSON.stringify(timelogRows)} */}
         <table className="min-w-full bg-white">
           <thead className="border-b-2 text-black bg-slate-200 border-blue-600 border-lg">
             <tr>
@@ -190,14 +245,14 @@ export const TimelogTaskTable = ({
                 </td>
               </tr>
             ) : (
-              timelogRows.map((tableRow: any, index: number) =>
+              timelogRows?.map((tableRow: any, index: number) =>
                 tableRow?.rowstatus == "r" ||
                 tableRow?.rowstatus == "d" ? null : (
                   <TimelogTaskTableRow
                     key={tableRow.rowindex}
                     index={index}
                     assignProjects={assignProjects}
-                    staffid={staffid}
+                    staffid={headerData.staffid}
                     timelogRowsIn={tableRow}
                     updateTableRows={updateTableRows}
                     onAddRow={addRow}
@@ -208,6 +263,12 @@ export const TimelogTaskTable = ({
             )}
           </tbody>
         </table>
+        <div className="fixed bottom-4 right-5">
+          {/* <Button color="danger">Cancel</Button> */}
+          <Button color="primary" className="ml-2" onClick={saveEvent}>
+            Save
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -61,6 +61,24 @@ model projecttasksassigns{
   taskid Int
 }
 
+model timelogs{
+  timelogid       Int      @id @default(autoincrement())
+  date String   
+  staffid Int 
+  workingType String  
+  remark String  
+}
+
+model timelogsdetails{
+  timelogdetailid       Int      @id @default(autoincrement())
+  timelogid Int
+  projectid Int
+  taskid Int
+  time Int
+  rowindex Int    
+  remark String  
+}
+
 model timealloc{
   timeallocid       Int      @id @default(autoincrement())
   date String   
@@ -93,6 +111,7 @@ model calanderdatasourcedata{
   endDate String
   color String
   uniqueKey String
+  dateType String @default("Poya Day")
 }
 
 model categories{

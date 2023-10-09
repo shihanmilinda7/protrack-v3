@@ -57,6 +57,7 @@ const NewCalendarEvent = ({
   const [datasourceid, setDatasourceid] = useState("");
   const [note, setNote] = useState("");
   const [colourCode, setColourCode] = useState("");
+  const [dateType, setDateType] = useState("");
 
   const customStyles = {
     overlay: {
@@ -106,6 +107,9 @@ const NewCalendarEvent = ({
 
   const addnew = () => {
     if (colourCode) {
+      const matchingDateType = dateTypes.find(
+        (dateType) => dateType.value === colourCode
+      );
       const sample = {
         id: nextid,
         name: note,
@@ -114,6 +118,7 @@ const NewCalendarEvent = ({
         endDate: new Date(selectedDate),
         color: colourCode,
         uniqueKey: selectedDate,
+        dateType: matchingDateType.name,
       };
       updatDataSource(sample);
       closePopup();
@@ -167,7 +172,7 @@ const NewCalendarEvent = ({
       >
         <div className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
           <div className="font-medium self-center text-xl sm:text-xl text-gray-800 mr-auto">
-            {/* {JSON.stringify(dataSource)} */}
+            {/* {JSON.stringify(dateType)} */}
             {selectedDate}
           </div>
           <div className="mt-5">
@@ -186,6 +191,7 @@ const NewCalendarEvent = ({
                     value={colourCode}
                     onChange={setColourCode}
                     radioArray={dateTypes}
+                    name={dateType}
                   />
                   {/* <RadioGroup
                     label="Select date type"
