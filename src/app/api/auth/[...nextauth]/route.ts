@@ -25,7 +25,8 @@ export const authOptions: NextAuthOptions = {
                             username: credentials?.username
                         },
                     })
-                    // console.log("user", user,)
+                    // console.log("user", user,)  // ok no np
+                    
                     if (user.length == 0) {
                         return null;
                     }
@@ -45,6 +46,7 @@ export const authOptions: NextAuthOptions = {
                         staffid: user[0].staffid,
                         username: user[0].username,
                         role: user[0].role,
+                        country: user[0].country,
                     }
                 } catch (error) {
                     console.log("Error: ", error);
@@ -66,6 +68,7 @@ export const authOptions: NextAuthOptions = {
                     staffid: token.staffid,
                     username: token.username,
                     role: token.role,
+                    country: token.country,
                     // randomKey: token.randomKey
                 }
             }
@@ -80,6 +83,7 @@ export const authOptions: NextAuthOptions = {
                     staffid: u.staffid,
                     username: u.username,
                     role: u.role,
+                    country: u.country,
                 }
             }
             return token

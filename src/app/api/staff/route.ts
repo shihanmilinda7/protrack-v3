@@ -93,6 +93,7 @@ export async function POST(request: Request) {
             username,
             password: hashedPassword,
             role,
+            country,
           },
         });
       }
@@ -143,6 +144,7 @@ export async function PUT(request: Request) {
         where: { userid },
         data: {
           username,
+          country,
           // password: hashedPassword,
           role,
         },

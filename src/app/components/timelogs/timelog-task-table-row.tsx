@@ -7,23 +7,26 @@ import { handleSelectChangeEvent } from "../utils";
 import { Button, Input } from "@nextui-org/react";
 import NextTextInputField from "../common-comp/nextui-input-fields/next-text-input-fields";
 import { AiFillMinusCircle, AiFillPlusCircle } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 export const TimelogTaskTableRow = ({
   index,
   assignProjects,
   staffid,
-  timelogRowsIn,
+  timelogRowIn,
   updateTableRows,
   onAddRow,
   onRemoveRow,
+  timelogRowsIn,
 }: {
   index: any;
   assignProjects: any[];
   staffid: any;
-  timelogRowsIn: any;
+  timelogRowIn: any;
   updateTableRows: (taskRow: any) => void;
   onAddRow: (taskRow: any) => void;
   onRemoveRow: (taskRow: any, index: any) => void;
+  timelogRowsIn: any[];
 }) => {
   let pathname: string = "";
 
@@ -38,16 +41,22 @@ export const TimelogTaskTableRow = ({
     }
   }
 
-  const [tableRow, setTableRow] = useState(timelogRowsIn);
+  const [tableRow, setTableRow] = useState(timelogRowIn);
+  const [tableRows, setTableRows] = useState(timelogRowsIn);
   const [assignTasks, setAssignTasks] = useState([]);
 
   useEffect(() => {
-    const q = { ...timelogRowsIn };
+    const q = { ...timelogRowIn };
     setTableRow(q);
 
     if (q.projectid) {
       getAssignTasks(q.projectid, staffid);
     }
+  }, [timelogRowIn]);
+
+  useEffect(() => {
+    const q = [...timelogRowsIn];
+    setTableRows(q);
   }, [timelogRowsIn]);
 
   const projectSelectEvent = (e) => {
@@ -62,10 +71,28 @@ export const TimelogTaskTableRow = ({
   };
 
   const taskSelectEvent = (e) => {
-    updateData({
-      ...tableRow,
-      taskid: e.target.value,
-    });
+    // console.log("timelogRowsIn",timelogRowsIn,)
+    const result = tableRows.find(
+      (t) =>
+        t.taskid === e.target.value || t.taskid === parseInt(e.target.value)
+    );
+    if (!result) {
+      updateData({
+        ...tableRow,
+        taskid: e.target.value,
+      });
+    } else {
+      toast.error("Task already selected!", {
+        position: "top-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    }
   };
 
   const getAssignTasks = async (projectid?: number, staffid?: number) => {

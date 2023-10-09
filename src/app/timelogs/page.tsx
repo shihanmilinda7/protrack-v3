@@ -37,10 +37,11 @@ export default function Timelog() {
   const calendarRef = useRef(null);
   const { data: session, status } = useSession();
   const tmpUser = session?.user;
+  const tmpCountry = tmpUser?.country;
   dispatch(setStaffId(tmpUser?.staffid));
   const staffid = useSelector((state: any) => state.userDetailReducer.staffid);
 
-  const country = "LK"; //todo get it from session
+  const country = tmpCountry ? tmpCountry : "LK"; //todo get it from session
   const [isOpen, setIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
 
@@ -177,7 +178,7 @@ export default function Timelog() {
       setMonthEvents(modifiedData);
     };
     // call the function
-    if (currentYear) {
+    if (currentYear && country) {
       fetchData().catch(console.error);
     }
   };
@@ -229,7 +230,7 @@ export default function Timelog() {
         <Navbar />
         <div className="flex items-center justify-center p-4">
           <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto">
-            <span className="text-indigo-600">Time log {currentMonth}</span>
+            <span className="text-indigo-600">Time log </span>
           </span>
         </div>
         <div className="pl-4 pr-4">

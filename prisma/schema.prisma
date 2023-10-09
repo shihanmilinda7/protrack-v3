@@ -16,6 +16,7 @@ model users{
   username String   
   password String
   role String @default("user")
+  country String @default("LK")
   createdAt DateTime @default(now())
 }
 

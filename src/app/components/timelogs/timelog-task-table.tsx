@@ -123,6 +123,7 @@ export const TimelogTaskTable = ({
   };
 
   const updateTableRows = (newVal: any) => {
+    // const result = timelogRows.find((t) => t.taskid === newVal.taskid);
     // console.log("newVal", newVal);
     const updatedArray = timelogRows.map((r) =>
       r.rowindex === newVal.rowindex ? newVal : r
@@ -253,10 +254,11 @@ export const TimelogTaskTable = ({
                     index={index}
                     assignProjects={assignProjects}
                     staffid={headerData.staffid}
-                    timelogRowsIn={tableRow}
+                    timelogRowIn={tableRow}
                     updateTableRows={updateTableRows}
                     onAddRow={addRow}
                     onRemoveRow={removeRow}
+                    timelogRowsIn={timelogRows}
                   />
                 )
               )
