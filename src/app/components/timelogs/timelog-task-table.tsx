@@ -132,6 +132,7 @@ export const TimelogTaskTable = ({
   };
 
   const saveEvent = async () => {
+    // const filteredArray = timelogRows.filter(item => item.projectid !== undefined);
     try {
       const response = await fetch(pathname + "/api/timelogs", {
         method: "POST",
