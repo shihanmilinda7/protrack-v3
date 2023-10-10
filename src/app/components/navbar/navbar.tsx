@@ -93,9 +93,12 @@ const Navbar = () => {
         case "time-allocation":
           router.push("/time-allocation");
           break;
-        case "work-done-report":
-          router.push("/work-done-report");
+        case "timelog-report":
+          router.push("/timelog-report");
           break;
+        // case "work-done-report":
+        //   router.push("/work-done-report");
+        //   break;
         case "setup-calendar":
           router.push("/setup-calendar");
           break;
@@ -287,7 +290,7 @@ const Navbar = () => {
                 </li>
               </ul>
             </div> */}
-            <li
+            {/* <li
               className={
                 userRole == "Admin" ||
                 userRole == "Manager" ||
@@ -306,7 +309,7 @@ const Navbar = () => {
               >
                 xTime logs
               </button>
-            </li>
+            </li> */}
             <li
               className={
                 userRole == "Admin" ||
@@ -331,9 +334,9 @@ const Navbar = () => {
               }
             >
               <button
-                onClick={() => navButtonHandler("work-done-report")}
+                onClick={() => navButtonHandler("timelog-report")}
                 className={
-                  currentRoute === "/work-done-report"
+                  currentRoute === "/timelog-report"
                     ? activeStyle
                     : nonActiveStyle
                 }

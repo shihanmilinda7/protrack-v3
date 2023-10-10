@@ -8,7 +8,6 @@ export async function GET(request: Request) {
 
   const tmpDate: any = searchParams.get("date");
   const tmpStaffid: any = searchParams.get("staffid");
-
   try {
     await prisma.$transaction(async (tx) => {
       const timelogData = await tx.timelogs.findMany({
@@ -22,27 +21,17 @@ export async function GET(request: Request) {
 
       for (let index = 0; index < timelogData.length; index++) {
         let element: any = timelogData[index];
-        const rawQuery = Prisma.sql`SELECT sum(td.time) as totaltime FROM timelogsdetails as td  where td.timelogid = ${element.timelogid}`;
-        const detailData: any = await prisma.$queryRaw(rawQuery);
-        element["totalHours"] = detailData[0]?.totaltime?.toString() ?? "0";
+        const rawQuery = Prisma.sql`SELECT p.projectname,pt.taskname,td.* FROM timelogsdetails as td left join projects as p on td.projectid = p.projectid left join projecttasks as pt on td.taskid = pt.taskid where td.timelogid = ${element.timelogid}`;
+        const detailData: any = await tx.$queryRaw(rawQuery);
+        element["taskdetails"] = detailData;
+        // console.log("timelogData", detailData);
+        const rawQuery1 = Prisma.sql`SELECT sum(td.time) as totaltime FROM timelogsdetails as td  where td.timelogid = ${element.timelogid}`;
+        const detailData1: any = await tx.$queryRaw(rawQuery1);
+        element["totalHours"] = detailData1[0]?.totaltime?.toString() ?? "0";
+
       }
       // console.log("timelogData", timelogData);
-      // console.log("timelogData",timelogData,)
       res = { message: "SUCCESS", timelogData };
-
-      // if (headerData.length > 0) {
-      //   const dataSource = await tx.calanderdatasourcedata.findMany({
-      //     where: {
-      //       calanderid: headerData[0].calanderid.toString(),
-      //       uniqueKey: {
-      //         startsWith: tmpMonth,
-      //       },
-      //     },
-      //   });
-      //   res = { message: "SUCCESS", headerData, dataSource };
-      // } else {
-      //   res = { message: "SUCCESS", headerData: [], dataSource: [] };
-      // }
       return "";
     });
   } catch (error) {

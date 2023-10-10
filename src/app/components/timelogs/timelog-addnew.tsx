@@ -161,7 +161,7 @@ const TimelogAddNew = ({
       setWorkingType(res.timelogHeaderData[0]?.workingType ?? "Working");
       setRemark(res.timelogHeaderData[0]?.remark ?? "");
       setTimelogid(res.timelogHeaderData[0]?.timelogid ?? "");
-      setTimelogDetails(res.timelogDetailData ?? []);
+      setTimelogDetails(res.timelogDetailData ? res.timelogDetailData : []);
       console.log("res.timelogDetailData", res.timelogDetailData);
     };
     // call the function

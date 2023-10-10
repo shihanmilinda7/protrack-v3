@@ -132,23 +132,39 @@ export const TimelogTaskTable = ({
   };
 
   const saveEvent = async () => {
-    // const filteredArray = timelogRows.filter(item => item.projectid !== undefined);
-    try {
-      const response = await fetch(pathname + "/api/timelogs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          timelogid: headerData.timelogid,
-          staffid: headerData.staffid,
-          date: headerData.date,
-          remark: headerData.remark,
-          workingType: headerData.workingType,
-          timelogRows,
-        }),
-      });
-      const res = await response.json();
-      if (res.message == "SUCCESS") {
-        toast.success("Successfully updated!", {
+    const filteredArray = timelogRows.filter(
+      (item) => item.projectid == "" || item.taskid == "" || item.time == 0
+    );
+    if (filteredArray.length == 0) {
+      try {
+        const response = await fetch(pathname + "/api/timelogs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            timelogid: headerData.timelogid,
+            staffid: headerData.staffid,
+            date: headerData.date,
+            remark: headerData.remark,
+            workingType: headerData.workingType,
+            timelogRows,
+          }),
+        });
+        const res = await response.json();
+        if (res.message == "SUCCESS") {
+          toast.success("Successfully updated!", {
+            position: "top-right",
+            autoClose: 1000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
+          toggleSaveFlag();
+        }
+      } catch (error) {
+        toast.error("Error!", {
           position: "top-right",
           autoClose: 1000,
           hideProgressBar: false,
@@ -158,10 +174,9 @@ export const TimelogTaskTable = ({
           progress: undefined,
           theme: "colored",
         });
-        toggleSaveFlag();
       }
-    } catch (error) {
-      toast.error("Error!", {
+    } else {
+      toast.info("Please remove incompleted entries!", {
         position: "top-right",
         autoClose: 1000,
         hideProgressBar: false,

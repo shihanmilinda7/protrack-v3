@@ -194,13 +194,13 @@ export default function Timelog() {
           staffid
       );
       const res = await reponse.json();
-      const modifiedData = res.timelogData.map((item) => ({
+      const modifiedData = res.timelogData?.map((item) => ({
         title: item.workingType,
         start: item.date, // Use the formatted date from item.date
         extendedProps: {
           description: "Total working hours - " + item.totalHours,
         },
-        backgroundColor: "#637f99",
+        backgroundColor: item.workingType == "Leave" ? "red" : "#637f99",
         borderColor: "#637f99",
       }));
 
