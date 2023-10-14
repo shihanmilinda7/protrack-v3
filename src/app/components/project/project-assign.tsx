@@ -266,7 +266,7 @@ const ProjectAssignScreen = ({
         </div>
         <div className="flex items-center justify-center">
           <div className="mx-auto min-w-[1400px] p-6 flex">
-            <div className="py-2 sm:w-1/2 w-full">
+            <div className="py-2 sm:w-2/3 w-full">
               <span className="text-xl leading-none text-gray-900 select-none pt-2 mr-auto">
                 Name:
                 <span className="italic text-base text-black-600">
@@ -292,7 +292,7 @@ const ProjectAssignScreen = ({
                 />
               </div>
             </div>
-            <div className="py-2 sm:w-1/2 w-full">
+            <div className="py-2 sm:w-1/3 w-full">
               <span className="text-xl leading-none text-gray-900 select-none pt-2 mr-auto">
                 Task list
                 <span className="italic text-base text-black-600"></span>

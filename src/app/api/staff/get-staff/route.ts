@@ -70,8 +70,12 @@ export async function GET(request: Request) {
         for (let index = 0; index < staff.length; index++) {
           const element = staff[index];
           const rawQuery = Prisma.sql`select pt.taskname from projecttasksassigns as pta join projecttasks as pt on pta.taskid = pt.taskid where pta.projectid = ${projectid} and pta.staffid = ${element.staffid}`;
-          const projectTasks: any = await prisma.$queryRaw(rawQuery);
+          const projectTasks: any = await tx.$queryRaw(rawQuery);
           element["assigntasks"] = projectTasks;
+
+          const rawQuery1 = Prisma.sql`select p.projectname from projectassigns as pa join projects as p on pa.projectid = p.projectid where pa.staffid = ${element.staffid}`;
+          const projects: any = await tx.$queryRaw(rawQuery1);
+          element["assignprojects"] = projects;
         }
         // console.log(staff);
         res = { message: "SUCCESS", staff, totalStaffCount };

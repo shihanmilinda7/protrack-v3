@@ -93,7 +93,7 @@ const TimelogAddNew = ({
     { name: "Working", value: "Working" },
     { name: "Flex time off", value: "Flex time off" },
     { name: "Leave", value: "Leave" },
-    { name: "Holiday", value: "Holiday" },
+    // { name: "Holiday", value: "Holiday" },
   ];
 
   useEffect(() => {

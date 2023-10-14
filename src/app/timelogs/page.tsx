@@ -200,7 +200,13 @@ export default function Timelog() {
         extendedProps: {
           description: "Total working hours - " + item.totalHours,
         },
-        backgroundColor: item.workingType == "Leave" ? "red" : "#637f99",
+        // backgroundColor: item.workingType == "Leave" ? "red" : "#637f99",
+        backgroundColor:
+          item.workingType == "Leave"
+            ? "#f71631"
+            : item.workingType === "Flex time off"
+            ? "#e0b46c"
+            : "#637f99",
         borderColor: "#637f99",
       }));
 
@@ -232,6 +238,30 @@ export default function Timelog() {
           <span className="text-2xl font-semibold leading-none text-gray-900 select-none pt-2 mr-auto">
             <span className="text-indigo-600">Time log</span>
           </span>
+          <div className="p-2 bg-[#637f99] w-[150px] text-center">
+            <div className="text-14">Working</div>
+            <div className=""></div>
+          </div>
+          <div className="p-2 bg-[#e0b46c] w-[150px] text-center">
+            <div className="text-14">Flex time of</div>
+            <div className=""></div>
+          </div>
+          <div className="p-2 bg-[#f71631] w-[150px] text-center">
+            <div className="text-14">Leave</div>
+            <div className=""></div>
+          </div>
+          {/* <div className="event-content bg-[#637f99] w-[100px] text-center">
+            <div className="event-title text-14">Working</div>
+            <div className="event-description"></div>
+          </div> */}
+          {/* <div className="event-content bg-[#e0b46c] w-[100px] text-center">
+            <div className="event-title text-14">Flex time off</div>
+            <div className="event-description"></div>
+          </div>
+          <div className="event-content bg-[#f71631] w-[100px] text-center">
+            <div className="event-title text-14">Leave</div>
+            <div className="event-description"></div>
+          </div> */}
         </div>
         <div className="pl-4 pr-4">
           <TimelogAddNew
@@ -254,7 +284,8 @@ export default function Timelog() {
             // eventMouseLeave={eventMouseLeave}
             eventOrder={customEventOrder}
             headerToolbar={{
-              start: "dayGridMonth,timeGridWeek,timeGridDay", // will normally be on the left. if RTL, will be on the right
+              start: "dayGridMonth", // will normally be on the left. if RTL, will be on the right
+              // start: "dayGridMonth,timeGridWeek,timeGridDay", // will normally be on the left. if RTL, will be on the right
               center: "title",
               end: "today prev,next", // will normally be on the right. if RTL, will be on the left
             }}

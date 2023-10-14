@@ -41,6 +41,11 @@ const config: Config = {
         lg: "0rem",
       },
     },
+    extend: {
+      fontSize: {
+        "14": "14px",
+      },
+    },
   },
   plugins: [
     nextui({

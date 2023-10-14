@@ -82,6 +82,10 @@ export const PrjAssignStaffTable = ({
               <th className="w-60 text-left py-5 px-1 text-sm font-bold">
                 Assign tasks
               </th>
+              <th className="w-60 text-left py-5 px-1 text-sm font-bold">
+                Assign projects
+              </th>
+
               {/* {tableHeads.map((head) => (
                 <th
                   key={head}
@@ -150,6 +154,18 @@ export const PrjAssignStaffTable = ({
                     {tableRow.assigntasks
                       ? tableRow.assigntasks
                           .map((task) => task.taskname)
+                          .join(", ")
+                      : "No Data"}
+                  </span>
+                </td>
+                <td className="text-left py-3 px-2">
+                  <span className="inline-block mr-2 last:mr-0 py-1 px-2 rounded-full bg-blue-500 text-xs font-semibold text-white">
+                    {tableRow.assignprojects.length}
+                  </span>
+                  <span>
+                    {tableRow.assignprojects
+                      ? tableRow.assignprojects
+                          .map((task) => task.projectname)
                           .join(", ")
                       : "No Data"}
                   </span>

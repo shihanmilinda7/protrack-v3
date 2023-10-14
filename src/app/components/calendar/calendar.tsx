@@ -194,7 +194,39 @@ export const SetupCalendar = ({
         />
       </div>
       <div className="flex gap-2 mt-6  justify-center items-center">
-        <div className="flex gap-2 justify-center items-center">
+        <div className="bg-[#ffff00] w-[150px] text-center p-2">
+          <div className="text-14">Public Holiday</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#ffc100] w-[150px] text-center">
+          <div className="text-14">Anniversary</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#a2ff00] w-[150px] text-center">
+          <div className="text-14">Special Occasion</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#0092ff] w-[150px] text-center">
+          <div className="text-14">Seasonal</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#5aff54] w-[150px] text-center">
+          <div className="text-14">Quarterly</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#007aff] w-[150px] text-center">
+          <div className="text-14">Month-End</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#00ffbc] w-[150px] text-center">
+          <div className="text-14">Year-End/Year's Eve</div>
+          <div className=""></div>
+        </div>
+        <div className="p-2 bg-[#ff7300] w-[150px] text-center">
+          <div className="text-14">Historical</div>
+          <div className=""></div>
+        </div>
+        {/* <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#ffff00] h-4 w-4"></div>
           <span className="">Public Holiday</span>
         </div>
@@ -205,16 +237,16 @@ export const SetupCalendar = ({
         <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#a2ff00] h-4 w-4"></div>
           <span className="">Special Occasion</span>
-        </div>
-        <div className="flex gap-2 justify-center items-center">
+        </div> */}
+        {/* <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#0092ff] h-4 w-4"></div>
           <span className="">Seasonal</span>
         </div>
         <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#5aff54] h-4 w-4"></div>
           <span className="">Quarterly</span>
-        </div>
-        <div className="flex gap-2 justify-center items-center">
+        </div> */}
+        {/* <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#007aff] h-4 w-4"></div>
           <span className="">Month-End</span>
         </div>
@@ -225,9 +257,9 @@ export const SetupCalendar = ({
         <div className="flex gap-2 justify-center items-center">
           <div className="bg-[#ff7300] h-4 w-4"></div>
           <span className="">Historical</span>
-        </div>
+        </div> */}
       </div>
-      <div className="flex justify-end mr-8">
+      <div className="flex justify-end mr-8 mt-3">
         <Button color="primary" onClick={submitButtonHandler}>
           Save
         </Button>
